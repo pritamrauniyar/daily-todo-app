@@ -33,11 +33,14 @@ const displayTasks = () => {
     // Create and append a checkbox for each task
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
+    checkbox.checked = todo.completed; // Set checkbox status based on task completion
     li.appendChild(checkbox);
 
     // Create and append a span for each task's text
     const span = document.createElement("span");
     span.textContent = todo.text;
+    // Set text-decoration style based on task completion
+    span.style.textDecoration = todo.completed ? "line-through" : "none";
     li.appendChild(span);
 
     // Create and append a delete button for each task
@@ -55,6 +58,7 @@ const displayTasks = () => {
     checkbox.addEventListener("change", () => {
       todo.completed = checkbox.checked;
       span.style.textDecoration = todo.completed ? "line-through" : "none";
+      saveData(); // Save updated tasks to local storage
     });
 
     // Append each task to the list
